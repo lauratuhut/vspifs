@@ -1,28 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import HomeScreen from "./HomeScreen";
+import ResultScreen from "./ResultScreen";
+import React, { useState } from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <h1 className="text-3xl font-bold underline">
-           Hello world!
-        </h1>
-      </header>
-    </div>
-  );
+  const [screen, setScreen] = useState("Home");
+
+  const onChangeScreen = (screen) => {
+    setScreen(screen);
+  }
+  
+  const screens = {
+    Home: HomeScreen,
+    Result: ResultScreen
+  }
+  const Screen = screens[screen] || HomeScreen;
+  return <Screen onChangeScreen={onChangeScreen} />;
 }
 
 export default App;
