@@ -97,10 +97,9 @@ function ResultScreen(props) {
                 />
               </div>
               <div
-                className="text-center text-3xl font-bold tracking-tight text-gray-900 pl-2 cursor-pointer"
-                onClick={() => props.onChangeScreen("Home")}
+                className="text-center text-3xl font-bold tracking-tight text-gray-900 pl-2"
               >
-                VSPifs
+                VSPifs {props.search ? `for ${props.search}` : ""}
               </div>
             </div>
           </div>
