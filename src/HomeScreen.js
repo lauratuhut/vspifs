@@ -1,5 +1,5 @@
 import { MagnifyingGlassIcon, XCircleIcon } from "@heroicons/react/20/solid";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function HomeScreen(props) {
   const [keyword, setKeyword] = useState("");
