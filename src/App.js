@@ -20,9 +20,8 @@ function App() {
       setLoading(true);
       const { data: gifs } = await gf.search(search, {
         sort: "relevant",
-        limit: 10,
+        limit: 100,
       });
-      // console.log(gifs);
       setResults(gifs);
       setLoading(false);
       if (gifs.length === 0) {

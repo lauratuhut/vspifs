@@ -1,5 +1,3 @@
-import { Gif } from "@giphy/react-components";
-
 function ResultScreen(props) {
   return (
     <>
@@ -24,10 +22,18 @@ function ResultScreen(props) {
           </div>
         </div>
       </nav>
-      <div className="mx-auto max-w-7xl px-2 py-6 sm:px-6 lg:px-8">
-        <div className="md:columns-5 gap-8">
+      <div className="mx-auto max-w-7xl py-8 px-2 sm:px-6 lg:px-8">
+        <div className="columns-5 gap-8">
           {props.results.map((item) => (
-            <Gif gif={item} className="mb-6"/>
+            <div className="w-full mb-8 overflow-hidden rounded-lg bg-gray-200 group">
+              <a key={item.id} href={item.url} className="group w-full">
+                <img
+                  src={item.images.fixed_height.url}
+                  alt={item.title}
+                  className="h-full w-full object-cover object-center group-hover:opacity-75"
+                />
+              </a>
+            </div>
           ))}
         </div>
       </div>
