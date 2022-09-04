@@ -16,7 +16,7 @@ function RecentSearches(props) {
       {data.map((item, index) => {
         return (
           <li key={index}>
-            <a className="text-blue-600 cursor-pointer" onClick={() => props.onSearch(item)}>{item}</a>
+            <button className="text-blue-600 cursor-pointer" onClick={() => props.onSearch(item)}>{item}</button>
           </li>
         );
       })}
