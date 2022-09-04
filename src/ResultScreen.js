@@ -10,7 +10,9 @@ function ResultScreen(props) {
                   className="block h-8 w-auto cursor-pointer"
                   src="https://victorysquarepartners.com/wp-content/uploads/2022/04/Favicon.svg"
                   alt="VSPifs"
-                  onClick={() => props.onChangeScreen("Home")}
+                  onClick={() => {
+                    props.onChangeScreen("Home");
+                  }}
                 />
               </div>
               <div className="text-center text-3xl font-bold tracking-tight text-gray-900 pl-2">
