@@ -1,11 +1,12 @@
 import { MagnifyingGlassIcon, XCircleIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
+import RecentSearches from "./RecentSearches";
 
 function HomeScreen(props) {
   const [keyword, setKeyword] = useState("");
 
-  const onSearch = () => {
-    props.onSearch(keyword);
+  const onSearch = (query) => {
+    props.onSearch(query || keyword);
   };
 
   const clearSearch = () => {
@@ -64,7 +65,7 @@ function HomeScreen(props) {
             <button
               type="button"
               className="mx-auto inline-block group relative flex w-full md:w-auto justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 md:px-8"
-              onClick={onSearch}
+              onClick={() => onSearch()}
             >
               <span className="inset-y-0 flex items-center pr-2">
                 <MagnifyingGlassIcon
@@ -76,6 +77,7 @@ function HomeScreen(props) {
             </button>
           </div>
         </form>
+        <RecentSearches onSearch={onSearch} />
       </div>
     </div>
   );

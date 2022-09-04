@@ -28,7 +28,16 @@ function App() {
         setErrorMessage(
           `Imi pare rau, nu am gasit rezultate pentru "${search}"`
         );
-      } else {
+      } else {        
+        let recentSearches = JSON.parse(localStorage.getItem('recentSearches')) || [];   
+        const maxSearches = 10;     
+        if (!recentSearches.includes(search)) {
+          recentSearches.unshift(search);     
+          if (recentSearches.length > maxSearches) {
+            recentSearches = recentSearches.slice(0, maxSearches);
+          }
+          localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
+        }
         setScreen("Result");
       }
     }

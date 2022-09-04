@@ -25,8 +25,8 @@ function ResultScreen(props) {
       <div className="mx-auto max-w-7xl py-8 px-2 sm:px-6 lg:px-8">
         <div className="columns-5 gap-8">
           {props.results.map((item) => (
-            <div className="w-full mb-8 overflow-hidden rounded-lg bg-gray-200 group">
-              <a key={item.id} href={item.url} className="group w-full">
+            <div key={item.id} className="w-full mb-8 overflow-hidden rounded-lg bg-gray-200 group">
+              <a href={item.url} className="group w-full">
                 <img
                   src={item.images.fixed_height.url}
                   alt={item.title}
