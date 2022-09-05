@@ -3,6 +3,7 @@ import HomeScreen from "./HomeScreen";
 import ResultScreen from "./ResultScreen";
 import React, { useEffect, useState } from "react";
 import { GiphyFetch } from "@giphy/js-fetch-api";
+import supabase from "./supabase";
 
 function App() {
   const [screen, setScreen] = useState("Home");
@@ -20,7 +21,7 @@ function App() {
       setLoading(true);
       const { data: gifs } = await gf.search(search, {
         sort: "relevant",
-        limit: 100,
+        limit: 20,
       });
       setResults(gifs);
       setLoading(false);
@@ -28,15 +29,34 @@ function App() {
         setErrorMessage(
           `Imi pare rau, nu am gasit rezultate pentru "${search}"`
         );
-      } else {        
-        let recentSearches = JSON.parse(localStorage.getItem('recentSearches')) || [];   
-        const maxSearches = 10;     
+      } else {
+        let recentSearches =
+          JSON.parse(localStorage.getItem("recentSearches")) || [];
+        const maxSearches = 10;
         if (!recentSearches.includes(search)) {
-          recentSearches.unshift(search);     
+          recentSearches.unshift(search);
           if (recentSearches.length > maxSearches) {
             recentSearches = recentSearches.slice(0, maxSearches);
           }
-          localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
+          localStorage.setItem(
+            "recentSearches",
+            JSON.stringify(recentSearches)
+          );
+        }
+        const { data: keyword } = await supabase
+          .from("searches")
+          .select("id, count")
+          .ilike("keyword", search)
+          .single();
+        if (keyword) {
+          await supabase
+            .from("searches")
+            .update({ count: keyword.count + 1 })
+            .eq("id", keyword.id);
+        } else {
+          await supabase
+            .from("searches")
+            .insert([{ keyword: search, count: 1 }]);
         }
         setScreen("Result");
       }
@@ -69,8 +89,8 @@ function App() {
         loading={loading}
       />
       {errorMessage && (
-        <p className="text-center text-red-800">
-          Imi pare rau, nu am gasit rezultate pentru
+        <p className="text-center text-red-800 pb-8">
+          Sorry, no results found for 
           <span className="italic"> {search}</span>
         </p>
       )}

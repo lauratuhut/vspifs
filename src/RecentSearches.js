@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import SearchList from "./SearchList";
 
 function RecentSearches(props) {
   const [data, setData] = useState([]);
@@ -11,16 +12,7 @@ function RecentSearches(props) {
   if (data.length === 0) return null;
 
   return (
-    <ul className="text-center">
-      <h1>Your {data.length} recent searches</h1>
-      {data.map((item, index) => {
-        return (
-          <li key={index}>
-            <button className="text-blue-600 cursor-pointer" onClick={() => props.onSearch(item)}>{item}</button>
-          </li>
-        );
-      })}
-    </ul>
+   <SearchList title={`Your ${data.length} recent searches`} data={data} onSearch={props.onSearch} />
   );
 }
 

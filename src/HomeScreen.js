@@ -1,6 +1,7 @@
 import { MagnifyingGlassIcon, XCircleIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
 import RecentSearches from "./RecentSearches";
+import TopSearches from "./TopSearches";
 
 function HomeScreen(props) {
   const [keyword, setKeyword] = useState("");
@@ -73,11 +74,13 @@ function HomeScreen(props) {
                   aria-hidden="true"
                 />
               </span>
-              Cauta
+              Search
             </button>
           </div>
         </form>
         <RecentSearches onSearch={onSearch} />
+
+        <TopSearches onSearch={onSearch} />
       </div>
     </div>
   );
