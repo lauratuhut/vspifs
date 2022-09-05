@@ -12,7 +12,7 @@ function TopSearches(props) {
         .select("keyword, count")
         .order("count", { ascending: false })
         .limit(10);
-      setData(data.map(item => `${item.keyword} (${item.count})`));
+      setData(data.map(item => `${item.keyword}`));
     }
     fetchData();
   }, []);
