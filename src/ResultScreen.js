@@ -23,7 +23,7 @@ function ResultScreen(props) {
         </div>
       </nav>
       <div className="mx-auto max-w-7xl py-8 px-2 sm:px-6 lg:px-8">
-        <div className="columns-5 gap-8">
+        <div className="md:columns-5 sm:columns-3 gap-8">
           {props.results.map((item) => (
             <div key={item.id} className="w-full mb-8 overflow-hidden rounded-lg bg-gray-200 group">
               <a href={item.url} className="group w-full">
