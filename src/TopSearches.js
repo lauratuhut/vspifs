@@ -7,7 +7,7 @@ function TopSearches(props) {
 
   useEffect(() => {
     async function fetchData() {
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from("searches")
         .select("keyword, count")
         .order("count", { ascending: false })
