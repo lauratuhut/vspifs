@@ -11,7 +11,7 @@ function ResultScreen(props) {
                   src="https://victorysquarepartners.com/wp-content/uploads/2022/04/Favicon.svg"
                   alt="VSPifs"
                   onClick={() => {
-                    props.onChangeScreen("Search");
+                    window.location.hash = "Search";
                   }}
                 />
               </div>

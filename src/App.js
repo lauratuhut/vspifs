@@ -67,20 +67,16 @@ function App() {
   }, [search]);
 
   useEffect(() => {
-    setHash(screen);
-  }, [screen]);
-
-  useEffect(() => {
-    setScreen(hash.substring(1));
+    const hashText = hash.substring(1);
+    if (hashText === "Search") {
+      setScreen("Search");
+    } else {
+      setSearch(hashText);
+    }
   }, [hash]);
 
-  const onChangeScreen = (screen) => {
-    setScreen(screen);
-    setLoading(loading);
-  };
-
   const onSearch = (search) => {
-    setSearch(search);
+    setHash(search);
   };
 
   const screens = {
@@ -93,8 +89,7 @@ function App() {
     <>
       <Screen
         search={search}
-        results={results}
-        onChangeScreen={onChangeScreen}
+        results={results}        
         onSearch={onSearch}
         loading={loading}
       />
