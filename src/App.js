@@ -1,16 +1,18 @@
 import "./App.css";
-import HomeScreen from "./HomeScreen";
+import SearchScreen from "./SearchScreen";
 import ResultScreen from "./ResultScreen";
 import React, { useEffect, useState } from "react";
 import { GiphyFetch } from "@giphy/js-fetch-api";
 import supabase from "./supabase";
+import { useHash } from "react-use";
 
 function App() {
-  const [screen, setScreen] = useState("Home");
+  const [screen, setScreen] = useState("Search");
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [hash, setHash] = useHash();
 
   useEffect(() => {
     setErrorMessage("");
@@ -64,6 +66,14 @@ function App() {
     fetchData();
   }, [search]);
 
+  useEffect(() => {
+    setHash(screen);
+  }, [screen]);
+
+  useEffect(() => {
+    setScreen(hash.substring(1));
+  }, [hash]);
+
   const onChangeScreen = (screen) => {
     setScreen(screen);
     setLoading(loading);
@@ -74,11 +84,11 @@ function App() {
   };
 
   const screens = {
-    Home: HomeScreen,
+    Search: SearchScreen,
     Result: ResultScreen,
   };
 
-  const Screen = screens[screen] || HomeScreen;
+  const Screen = screens[screen] || SearchScreen;
   return (
     <>
       <Screen
@@ -90,7 +100,7 @@ function App() {
       />
       {errorMessage && (
         <p className="text-center text-red-800 pb-8">
-          Sorry, no results found for 
+          Sorry, no results found for
           <span className="italic"> {search}</span>
         </p>
       )}

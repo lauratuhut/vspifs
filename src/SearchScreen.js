@@ -3,7 +3,7 @@ import { useState } from "react";
 import RecentSearches from "./RecentSearches";
 import TopSearches from "./TopSearches";
 
-function HomeScreen(props) {
+function SearchScreen(props) {
   const [keyword, setKeyword] = useState("");
 
   const onSearch = (query) => {
@@ -86,4 +86,4 @@ function HomeScreen(props) {
   );
 }
 
-export default HomeScreen;
+export default SearchScreen;
